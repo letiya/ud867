@@ -1,22 +1,26 @@
-package com.udacity.gradle.builditbigger;
+package com.example.android.mylibrary;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.view.View;
-import android.widget.Toast;
+import android.widget.TextView;
+
 import com.example.android.javajokes.Joker;
-import com.example.android.mylibrary.JokeActivity;
 
+public class JokeActivity extends AppCompatActivity {
 
-public class MainActivity extends AppCompatActivity {
+    private TextView mJoke;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+        setContentView(R.layout.activity_joke);
+
+        mJoke = findViewById(R.id.libraryJokeTextView);
+
+        Joker myJoke = new Joker();
+        mJoke.setText(myJoke.getJoke());
     }
 
     @Override
@@ -39,16 +43,6 @@ public class MainActivity extends AppCompatActivity {
         }
 
         return super.onOptionsItemSelected(item);
-    }
-
-    public void tellJoke(View view) {
-        Joker myJoke = new Joker();
-        Toast.makeText(this, myJoke.getJoke(), Toast.LENGTH_SHORT).show();
-    }
-
-    public void launchLibraryActivity(View view) {
-        Intent myIntent = new Intent(this, JokeActivity.class);
-        startActivity(myIntent);
     }
 
 }
