@@ -1,12 +1,11 @@
 package com.example.android.mylibrary;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.TextView;
-
-import com.example.android.javajokes.Joker;
 
 public class JokeActivity extends AppCompatActivity {
 
@@ -17,10 +16,12 @@ public class JokeActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_joke);
 
-        mJoke = findViewById(R.id.libraryJokeTextView);
+        mJoke = findViewById(R.id.library_joke_text_view);
 
-        Joker myJoke = new Joker();
-        mJoke.setText(myJoke.getJoke());
+        Intent intentThatStartedThisActivity = getIntent();
+        String myJoke = intentThatStartedThisActivity.getStringExtra("Joke");
+        mJoke.setText(myJoke);
+
     }
 
     @Override
