@@ -57,6 +57,10 @@ class EndpointsAsyncTask extends AsyncTask<Pair<Context, String>, Void, String> 
     @Override
     protected void onPostExecute(String result) {
         Toast.makeText(context, result, Toast.LENGTH_LONG).show();
+
+        Intent myIntent = new Intent(context, JokeActivity.class);
+        myIntent.putExtra(Intent.EXTRA_TEXT, result);
+        context.startActivity(myIntent);
     }
 }
 
@@ -97,17 +101,6 @@ public class MainActivity extends AppCompatActivity {
 
     public void launchLibraryActivity(View view) {
         EndpointsAsyncTask endpointsAsyncTask = new EndpointsAsyncTask();
-        String myJoke = "";
-        try {
-            myJoke = endpointsAsyncTask.execute(new Pair<Context, String>(this, "Manfred")).get();
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        } catch (ExecutionException e) {
-            e.printStackTrace();
-        }
-
-        Intent myIntent = new Intent(this, JokeActivity.class);
-        myIntent.putExtra("Joke", myJoke);
-        startActivity(myIntent);
+        endpointsAsyncTask.execute(new Pair<Context, String>(this, "Manfred"));
     }
 }
